@@ -7,7 +7,7 @@ from client_server import Client, Server
 import torch.optim as optim
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--dataset', type=str, default='Cora', help='Dataset name (Cora or WikiCS)')
+parser.add_argument('--dataset', type=str, default='WikiCS', help='Dataset name (Cora or WikiCS)')
 parser.add_argument('--optimizer', type=str, default='Adam', help='Optimizer type (Adam or SGD)')
 parser.add_argument('--clients', type=int, default=10, help='Number of clients')
 parser.add_argument('--fed_algo', type=str, default='fedavg', help='Federated learning algorithm (fedavg or fedprox)')
@@ -17,6 +17,10 @@ args = parser.parse_args()
 
 dataset_name = args.dataset
 data = load_data(dataset_name)
+
+# data = load_data('WikiCS')
+# print(f'Shape of data: {data.x.shape}')
+# print(f'Shape of train_mask: {data.train_mask.shape}')
 
 model = GCN(data.num_features, 16, data.num_classes)
 
