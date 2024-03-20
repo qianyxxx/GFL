@@ -41,7 +41,10 @@ class Client:
 
     def train(self):
         loss = train(self.data, self.model, self.optimizer)
-        return self.model.state_dict()
+        return self.model.state_dict(), loss
 
     def receive_model(self, model):
         self.model.load_state_dict(model.state_dict())
+    
+    def get_last_loss(self):
+        return self.last_loss
